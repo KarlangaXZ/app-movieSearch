@@ -12,7 +12,6 @@ clean UI styled with custom CSS. The app fetches data from the external TMDb API
 - 🎭 Displays the movie title, description, and poster.
 - 🎨 Custom styles with CSS.
 - 🌐 Consumes the external TMDb API.
-- 
 ## 🛠️ Technologies Used
 
 - **React + Vite** ⚛️
