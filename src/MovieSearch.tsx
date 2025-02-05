@@ -10,7 +10,7 @@ interface Movie {
 
 export default function MovieSearch() {
   const urlBase = "https://api.themoviedb.org/3/search/movie";
-  const API_KEY = "fbd3378542e8017013c7b48792acc89f";
+  const API_KEY = import.meta.env.VITE_API_KEY as string;
 
   const [search, setSearch] = useState("");
   const [movie, setMovie] = useState<Movie[]>([]);
