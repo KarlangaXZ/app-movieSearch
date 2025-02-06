@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-
 interface Movie {
-    id: number;
-    title: string;
-    overview: string;
-    poster_path: string;
-  }
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+}
 
 export default function MovieSearch() {
   const urlBase = "https://api.themoviedb.org/3/search/movie";
@@ -26,27 +25,31 @@ export default function MovieSearch() {
 
   const fetchMovie = async () => {
     try {
-    const apiUrl = `${urlBase}?api_key=${API_KEY}&query=${encodeURIComponent(search)}`;
-    console.log("Fetching URL:", apiUrl);
+      const apiUrl = `${urlBase}?api_key=${API_KEY}&query=${encodeURIComponent(
+        search
+      )}`;
+      console.log("Fetching URL:", apiUrl);
 
-    const res = await fetch(apiUrl);
-    if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`);
-     // const res = await fetch(`${urlBase}?api_key=${API_KEY}&query=${(search)}`);
-    }
+      const res = await fetch(apiUrl);
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+        // const res = await fetch(`${urlBase}?api_key=${API_KEY}&query=${(search)}`);
+      }
       const data = await res.json();
-        console.log("API RESPONSE:", data);
+      console.log("API RESPONSE:", data);
 
-        if (!data.results || !Array.isArray(data.results)) {
-            console.error("API response does not contain a valid 'results' array:", data);
-            setMovie([]); // Evita errores si la API no devuelve películas
-            return;
-        }
+      if (!data.results || !Array.isArray(data.results)) {
+        console.error(
+          "API response does not contain a valid 'results' array:",
+          data
+        );
+        setMovie([]); // Evita errores si la API no devuelve películas
+        return;
+      }
 
       setMovie(data.results);
-
     } catch (error) {
-      console.error('Ha ocurrido un error:', error);
+      console.error("Ha ocurrido un error:", error);
       setMovie([]);
     }
   };
@@ -67,20 +70,18 @@ export default function MovieSearch() {
         </button>
       </form>
 
-    <div className="movie-list">
+      <div className="movie-list">
         {movie.map((movie: Movie) => (
-            <div key={movie.id} className="movie-card">
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-                <h2>{movie.title}</h2>
-                <p>{movie.overview}</p>
-            </div>
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h2>{movie.title}</h2>
+            <p>{movie.overview}</p>
+          </div>
         ))}
-
-       
+      </div>
     </div>
-  
-    </div>
-
   );
-
 }
